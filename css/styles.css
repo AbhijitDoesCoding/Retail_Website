@@ -283,21 +283,41 @@ button {
 
 /* Browse Layout */
 .browse-layout {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 3rem;
+    display: flex;
+    gap: 32px;
     padding: var(--spacing-lg) 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: start;
+    align-items: flex-start;
+    overflow-x: hidden;
+}
+
+.collection-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
 }
 
 .sidebar {
-    position: sticky;
-    top: 100px;
+    width: 240px;
+    flex: 0 0 240px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
     background: var(--surface);
     padding: 2rem;
     border-radius: var(--radius-md);
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.collection-content {
+    flex: 1;
 }
 
 .sidebar-title {
@@ -313,17 +333,36 @@ button {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.brand-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.brand-list::-webkit-scrollbar-thumb {
+    background: rgba(74, 46, 50, 0.25);
+    border-radius: 999px;
 }
 
 .brand-item {
+    display: block;
     padding: 0.8rem 1rem;
     border-radius: var(--radius-sm);
     color: var(--accent);
     font-size: 0.9rem;
+    line-height: 1.2;
+    min-height: 42px;
+    font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: background-color var(--transition), color var(--transition);
     text-align: left;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .brand-item:hover {
@@ -339,16 +378,18 @@ button {
 /* Category Container & Items */
 .category-container {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 24px;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 10px 16px;
-    scrollbar-width: none;   /* Firefox */
-    margin-bottom: 2rem;
+    scrollbar-width: none;
+    padding: 0 0 6px;
+    min-width: 0;
 }
 
 .category-container::-webkit-scrollbar {
-    display: none;           /* Chrome */
+    display: none;
 }
 
 .category-item {
@@ -356,14 +397,58 @@ button {
     color: #6B5B5B;
     cursor: pointer;
     white-space: nowrap;
-    padding-bottom: 4px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
     transition: var(--transition);
 }
 
 .category-item.active {
-    color: #1A1A1A;
+    color: #4A2E32;
     font-weight: 500;
-    border-bottom: 2px solid #6E5155;
+    border-bottom: 1px solid #6E5155;
+}
+
+.collection-header {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+.collection-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    margin: 0;
+}
+
+.collection-title {
+    font-size: 2.5rem;
+    margin: 0;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.collection-subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.collection-subtitle:empty {
+    display: none;
+}
+
+.category-filters {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 4px;
+    padding-bottom: 6px;
 }
 
 /* Hero Section */
@@ -437,10 +522,19 @@ button {
     margin-bottom: 1rem;
 }
 
+.section-header.collection-header {
+    margin-bottom: 0;
+}
+
+.section-header.collection-header .collection-title {
+    margin-bottom: 0;
+}
+
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
 }
 
 /* Product Card */
@@ -450,6 +544,9 @@ button {
     overflow: hidden;
     transition: var(--transition);
     position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .product-card:hover {
@@ -458,15 +555,23 @@ button {
 }
 
 .product-image {
+    width: 100%;
     aspect-ratio: 3/4;
+    border-radius: 16px;
     overflow: hidden;
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
+    aspect-ratio: 3/4;
     object-fit: cover;
+    border-radius: 16px;
     transition: var(--transition);
+}
+
+@media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .product-card:hover .product-image img {

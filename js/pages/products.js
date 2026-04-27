@@ -76,7 +76,7 @@ export async function Products() {
     }
 
     return `
-        <div class="browse-layout">
+        <div class="browse-layout collection-layout">
             <aside class="sidebar">
                 <h3 class="sidebar-title">Brands</h3>
                 <div class="brand-list">
@@ -91,14 +91,15 @@ export async function Products() {
                 </div>
             </aside>
             
-            <div class="main-content">
-                <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-                    <h2 style="font-size: 2.5rem;">
-                        ${state.searchQuery ? `Search: "${state.searchQuery}"` : 'Collection'}
-                    </h2>
+            <div class="main-content collection-content">
+                <div class="section-header collection-header">
+                    <div class="collection-heading">
+                        <h2 class="collection-title">Collection</h2>
+                        <p class="collection-subtitle">${state.searchQuery ? `Results for "${state.searchQuery}"` : ''}</p>
+                    </div>
                 </div>
-                
-                <div class="category-container" id="categoryContainer">
+
+                <div class="category-container category-filters" id="categoryContainer">
                     <div class="category-item ${!state.selectedCategory ? 'active' : ''}" data-category="All">
                         All
                     </div>
@@ -109,7 +110,7 @@ export async function Products() {
                     `).join('')}
                 </div>
                 
-                <div class="product-grid" id="products-list">
+                <div class="product-grid products-grid" id="products-list">
                     ${renderProductList(products)}
                 </div>
             </div>
