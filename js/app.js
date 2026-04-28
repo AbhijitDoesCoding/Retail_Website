@@ -5,8 +5,8 @@ import { ProductDetail } from './pages/details.js';
 
 // State Management
 export const state = {
-    cart: JSON.parse(localStorage.getItem('luxe_cart') || '[]'),
-    currentUser: JSON.parse(localStorage.getItem('luxe_user') || 'null'),
+    cart: JSON.parse(localStorage.getItem('rsms_cart') || '[]'),
+    currentUser: JSON.parse(localStorage.getItem('rsms_user') || 'null'),
     searchQuery: '',
     selectedBrandId: null,
     selectedCategory: null,
@@ -29,7 +29,7 @@ export const state = {
     },
 
     saveCart() {
-        localStorage.setItem('luxe_cart', JSON.stringify(this.cart));
+        localStorage.setItem('rsms_cart', JSON.stringify(this.cart));
     },
 
     updateCartUI() {
@@ -224,7 +224,7 @@ document.getElementById('auth-btn').onclick = async () => {
                 const { api } = await import('./api.js');
                 await api.logoutCustomer();
                 state.currentUser = null;
-                localStorage.removeItem('luxe_user');
+                localStorage.removeItem('rsms_user');
                 updateAuthUI();
             } catch (err) {
                 alert('Logout failed: ' + err.message);
@@ -265,7 +265,7 @@ function showAuthModal(isLogin = true) {
                 <button class="btn btn-primary btn-block" id="submit-auth-btn" style="margin-top: 1rem;">${isLogin ? 'Login' : 'Sign Up'}</button>
                 
                 <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
-                    ${isLogin ? 'New to LUXE? <a href="#" id="toggle-auth" style="color: var(--primary); font-weight: 600;">Create an account</a>' 
+                    ${isLogin ? 'New to RSMS? <a href="#" id="toggle-auth" style="color: var(--primary); font-weight: 600;">Create an account</a>' 
                              : 'Already have an account? <a href="#" id="toggle-auth" style="color: var(--primary); font-weight: 600;">Log in</a>'}
                 </p>
             </div>
@@ -308,7 +308,7 @@ function showAuthModal(isLogin = true) {
                 state.currentUser = user;
             }
 
-            localStorage.setItem('luxe_user', JSON.stringify(state.currentUser));
+            localStorage.setItem('rsms_user', JSON.stringify(state.currentUser));
             updateAuthUI();
             document.getElementById('auth-modal').remove();
             

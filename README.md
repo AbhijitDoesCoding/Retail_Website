@@ -1,6 +1,6 @@
-# LUXE | Premium Retail Web Experience
+# RSMS | Premium Retail Web Experience
 
-LUXE is a beautifully crafted, responsive customer-facing web application for a luxury retail brand. It provides a premium shopping experience featuring an Art Deco design aesthetic, dynamic category filtering, and a secure Supabase-powered authentication flow.
+RSMS is a beautifully crafted, responsive customer-facing web application for a luxury retail brand. It provides a premium shopping experience featuring an Art Deco design aesthetic, dynamic category filtering, and a secure Supabase-powered authentication flow.
 
 ## 🌟 Features
 
